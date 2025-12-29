@@ -34,19 +34,20 @@ jobs:
       run: |
         python -c "import sys; sys.path.insert(0, 'src'); from car import Car; print('Car class imported successfully')"
         
-    # 5. Запускаем линтер Ruff на ВСЕХ файлах в src
-    - name: Run Ruff linter
-      run: |
-        echo "Checking all Python files in src/"
-        ruff check --config=ruff.toml ./src/
-        
-    # 6. Запускаем тесты (они в src/)
+    # 5. Запускаем тесты (они в src/)
     - name: Run Unit Tests
       run: |
         echo "Running tests from src/test_class_car.py"
         cd src
         pytest test_class_car.py -v
         
+    # 6. Запускаем линтер Ruff на ВСЕХ файлах в src
+    - name: Run Ruff linter
+      run: |
+        echo "Checking all Python files in src/"
+        ruff check --config=ruff.toml ./src/
+        
+    
     # 7. Дополнительная проверка: игнорируем тестовые файлы для основной проверки
     - name: Lint source files only (excluding tests)
       run: |
